@@ -26,8 +26,14 @@ export const repoSlug = env.GITHUB_REPOSITORY ?? DEFAULT_REPO_SLUG;
  */
 export const installRef = env.INSTALL_REF ?? env.GITHUB_SHA ?? 'main';
 
+/**
+ * --ref를 함께 넘긴다. 파이프로 실행된 스크립트는 자기가 어느 커밋에서 왔는지
+ * 알 수 없어서, 이걸 빼면 스크립트만 고정되고 레시피는 main에서 받아온다.
+ * 그러면 오래된 슬랙 메시지가 그 시점이 아닌 현재 레시피를 설치하게 된다.
+ */
 export function installCommand(recipeId: string): string {
-  return `curl -fsSL https://raw.githubusercontent.com/${repoSlug}/${installRef}/install.sh | bash -s -- ${recipeId}`;
+  const base = `https://raw.githubusercontent.com/${repoSlug}/${installRef}`;
+  return `curl -fsSL ${base}/install.sh | bash -s -- ${recipeId} --ref ${installRef}`;
 }
 
 export function repoFileUrl(path: string): string {

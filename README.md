@@ -78,7 +78,7 @@ npm run typecheck
 ```bash
 # 슬랙 메시지에 나오는 형태 (ref가 발행 시점 커밋으로 고정돼 있다)
 curl -fsSL https://raw.githubusercontent.com/ingstory2013/claude-code-edu/<ref>/install.sh \
-  | bash -s -- explore-agent
+  | bash -s -- explore-agent --ref <ref>
 
 # 뭘 하는지 먼저 보고 싶다면
 curl -fsSL .../install.sh | bash -s -- explore-agent --dry-run
@@ -87,12 +87,17 @@ curl -fsSL .../install.sh | bash -s -- explore-agent --dry-run
 curl -fsSL .../install.sh | bash -s -- --list
 ```
 
+> `--ref`가 왜 또 붙는가: 파이프로 실행된 스크립트는 자기가 어느 커밋에서 왔는지
+> 알 수 없다. 이걸 빼면 스크립트만 고정되고 **레시피는 `main`에서** 받아와서,
+> 몇 달 전 슬랙 메시지가 그 시점이 아닌 현재 레시피를 설치하게 된다.
+
 **옵션**
 
 | 옵션 | 동작 |
 |---|---|
 | `--dry-run` | 아무것도 쓰지 않고 설치 계획만 출력 |
 | `--project` | `~/.claude` 대신 현재 디렉터리의 `./.claude`에 설치 |
+| `--ref <ref>` | 레시피를 받아올 브랜치/태그/커밋 (기본 `main`) |
 | `--list` | 설치 가능한 레시피 목록 |
 
 ### `curl \| bash`가 꺼려진다면
