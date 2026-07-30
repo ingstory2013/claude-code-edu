@@ -19,10 +19,13 @@
 set -euo pipefail
 
 REPO_SLUG="${CLAUDE_EDU_REPO:-ingstory2013/claude-code-edu}"
-# curl로 받아 실행될 때는 이 값이 배포 시점 ref로 치환된다.
+# 레시피를 받아올 ref.
+#
+# 파이프로 실행되면 스크립트는 자기가 어느 커밋에서 왔는지 알 수 없다. 그래서
+# 슬랙 메시지의 설치 명령은 --ref로 커밋을 넘겨준다 — 안 넘기면 스크립트만
+# 고정되고 레시피는 main에서 와서 "발행 시점 재현"이 깨진다.
 # 로컬 클론에서는 리포 파일을 직접 쓰므로 이 값이 쓰이지 않는다.
 REF="${CLAUDE_EDU_REF:-main}"
-RAW_BASE="https://raw.githubusercontent.com/${REPO_SLUG}/${REF}"
 
 DRY_RUN=0
 SCOPE="user"     # user | project
@@ -53,12 +56,14 @@ usage() {
   --dry-run     아무것도 쓰지 않고 설치 계획만 출력한다.
   --project     ~/.claude 대신 현재 디렉터리의 ./.claude 에 설치한다.
                 (해당 프로젝트에서만 적용하고 싶을 때)
+  --ref <ref>   레시피를 받아올 브랜치/태그/커밋. 기본값 main.
+                슬랙 메시지의 설치 명령에는 발행 시점 커밋이 들어 있다.
   --list        설치할 수 있는 레시피 목록을 출력한다.
   --help        이 도움말.
 
 환경변수:
   CLAUDE_EDU_REPO   기본값 ingstory2013/claude-code-edu
-  CLAUDE_EDU_REF    받아올 브랜치/태그/커밋. 기본값 main
+  CLAUDE_EDU_REF    --ref와 같다. 플래그가 우선한다.
 USAGE
 }
 
@@ -69,6 +74,12 @@ while [ $# -gt 0 ]; do
     --dry-run) DRY_RUN=1 ;;
     --project) SCOPE="project" ;;
     --list)    DO_LIST=1 ;;
+    --ref)
+      [ $# -ge 2 ] || die "--ref 뒤에 값이 필요합니다."
+      REF="$2"
+      shift
+      ;;
+    --ref=*)   REF="${1#--ref=}" ;;
     --help|-h) usage; exit 0 ;;
     -*)        die "알 수 없는 옵션: $1 (--help 참고)" ;;
     *)
@@ -80,6 +91,9 @@ while [ $# -gt 0 ]; do
   esac
   shift
 done
+
+# --ref를 반영해야 하므로 인자 파싱이 끝난 뒤에 조립한다.
+RAW_BASE="https://raw.githubusercontent.com/${REPO_SLUG}/${REF}"
 
 # ── 소스 판별: 로컬 클론이냐 원격이냐 ────────────────────────────────────
 
