@@ -1,0 +1,27 @@
+id: explore-subagent-fanout
+title: 코드 탐색은 Explore 서브에이전트에 맡기기
+category: orchestration
+level: beginner
+summary: |
+  "이 기능이 어디 구현돼 있지?" 같은 탐색은 파일을 여러 개 열어봐야 답이 나오는데,
+  그 파일 내용이 전부 메인 대화에 쌓이면 정작 중요한 작업을 할 컨텍스트가 남지 않는다.
+  Explore 서브에이전트는 별도 컨텍스트에서 훑고 결론만 돌려주므로, 메인 창에는
+  파일 덩어리 대신 답만 남는다.
+why: |
+  탐색은 토큰을 가장 많이 먹으면서 결과물은 한두 문장인 작업이다.
+  탐색 과정을 메인 컨텍스트에서 분리하면 같은 세션에서 훨씬 오래 일할 수 있다.
+how:
+  - '"인증 로직이 어디 있는지 Explore 에이전트로 찾아줘"처럼 에이전트를 지정해 요청한다.'
+  - 탐색 범위를 함께 알려준다 — "medium"은 적당히, "very thorough"는 여러 위치·네이밍까지.
+  - 서브에이전트가 돌아오면 그 결론을 근거로 본 작업을 지시한다.
+  - 리뷰나 감사가 필요하면 Explore로 위치만 찾고, 판단은 메인 창에서 한다.
+verify: |
+  요청 후 /context를 실행해 본다. 탐색한 파일 내용이 메인 컨텍스트에 들어와 있지 않고
+  서브에이전트의 요약만 남아 있으면 제대로 동작한 것이다.
+sources:
+  - https://code.claude.com/docs/en/sub-agents
+tags:
+  - subagents
+  - context
+  - exploration
+added: '2026-07-30'

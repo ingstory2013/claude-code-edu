@@ -1,0 +1,26 @@
+id: context-inspect
+title: /context로 토큰이 어디로 새는지 먼저 확인하기
+category: token-efficiency
+level: beginner
+summary: |
+  세션이 느려지거나 컨텍스트가 부족하다고 느낄 때 대부분은 짐작으로 대응한다.
+  /context는 시스템 프롬프트, CLAUDE.md, 툴 정의, 대화 내역이 각각 몇 토큰을
+  쓰는지 실제 숫자로 보여준다. 어디를 줄여야 하는지 추측 없이 알 수 있다.
+why: |
+  토큰 최적화는 측정 없이 하면 대개 엉뚱한 곳을 줄인다. 실제로는 비대한 CLAUDE.md나
+  잔뜩 붙은 MCP 서버의 툴 정의가 원인인 경우가 많다.
+how:
+  - 세션 중 아무 때나 /context를 실행한다.
+  - 상위 항목부터 본다 — CLAUDE.md, MCP 툴 정의, 읽은 파일 순으로 흔한 범인이다.
+  - CLAUDE.md가 크면 상세 내용을 스킬이나 하위 디렉터리 CLAUDE.md로 옮긴다.
+  - 안 쓰는 MCP 서버는 설정에서 뺀다 — 툴 정의는 매 요청 프리픽스에 들어간다.
+verify: |
+  손을 본 뒤 /context를 다시 실행해 해당 항목의 토큰 수가 실제로 줄었는지 비교한다.
+sources:
+  - https://code.claude.com/docs/en/costs
+  - https://code.claude.com/docs/en/memory
+tags:
+  - context
+  - measurement
+  - claude-md
+added: '2026-07-30'
