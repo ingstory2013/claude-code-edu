@@ -1,0 +1,88 @@
+name: 일일 팁 포스팅
+
+on:
+  schedule:
+    # UTC 00:00 = KST 09:00, 평일만.
+    - cron: '0 0 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      tip:
+        description: '특정 팁 id를 지정해 발행 (비우면 로테이션)'
+        required: false
+        type: string
+      dry_run:
+        description: '슬랙에 보내지 않고 결과만 확인'
+        required: false
+        type: boolean
+        default: false
+
+# 동시에 두 번 돌면 같은 팁이 두 번 나가거나 state 커밋이 충돌한다.
+concurrency:
+  group: daily-tip
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    permissions:
+      # state/posted.json을 커밋해 되돌리기 위해 필요하다.
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      # 발행 전에 라이브러리가 온전한지 확인한다. 깨진 팁을 슬랙에 내보내는 것보다
+      # 그날 하루 거르는 편이 낫다.
+      - name: 팁 라이브러리 검증
+        run: npm run lint:tips
+
+      - name: 팁 발행
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          # 설치 URL을 이 커밋으로 고정한다. 슬랙에 남은 오래된 메시지의 설치
+          # 명령이 나중에 install.sh가 바뀌어도 그 시점 내용을 재현하도록.
+          GITHUB_SHA: ${{ github.sha }}
+          # 사용자 입력은 env로 넘긴다. run 블록에 ${{ }}로 직접 넣으면
+          # 입력값이 셸 스크립트로 해석돼 명령 주입이 가능하다.
+          INPUT_TIP: ${{ inputs.tip }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ -n "${INPUT_TIP:-}" ]; then
+            args+=(--tip "$INPUT_TIP")
+          fi
+          if [ "${INPUT_DRY_RUN:-}" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          npx tsx src/post-daily.ts "${args[@]}"
+
+      - name: 로테이션 상태 커밋
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          if git diff --quiet -- state/posted.json; then
+            echo "state 변경 없음 — 커밋하지 않습니다."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add state/posted.json
+          git commit -m "chore: 일일 팁 발행 기록 갱신 [skip ci]"
+          # 커밋 사이에 다른 푸시가 있었을 수 있다. rebase 후 재시도한다.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "푸시 실패, 재시도 $attempt/3"
+            git pull --rebase --autostash
+            sleep $((attempt * 2))
+          done
+          echo "state 커밋에 실패했습니다. 다음 실행에서 같은 팁이 다시 나갈 수 있습니다." >&2
+          exit 1

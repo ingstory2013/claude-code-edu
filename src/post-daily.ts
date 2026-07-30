@@ -1,10 +1,13 @@
 import { parseArgs } from 'node:util';
+import { installFailureHandler } from './fail.js';
 import { loadLibraryOrThrow } from './library.js';
 import { renderTip } from './render.js';
 import { selectTip, type Selection } from './select.js';
 import { postTip } from './slack.js';
 import { loadState, recordPosted, saveState } from './state.js';
 import { installRef, repoSlug } from './config.js';
+
+installFailureHandler();
 
 const { values } = parseArgs({
   options: {

@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { z } from 'zod';
+import { z } from 'zod/v4';
 import { STATE_FILE } from './paths.js';
 
 const stateSchema = z.object({

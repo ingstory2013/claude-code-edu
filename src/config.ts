@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 const envSchema = z.object({
   SLACK_BOT_TOKEN: z.string().trim().min(1).optional(),
