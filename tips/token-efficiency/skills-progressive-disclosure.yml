@@ -1,0 +1,26 @@
+id: skills-progressive-disclosure
+title: 스킬로 "필요할 때만 로드"되게 만들기
+category: token-efficiency
+level: intermediate
+summary: |
+  스킬은 설명 한 줄만 항상 컨텍스트에 두고, 실제 내용은 그 작업을 할 때만 읽는다.
+  배포 절차나 특정 도메인 규칙처럼 "가끔 필요하지만 길다"는 내용에 딱 맞는 구조다.
+why: |
+  같은 내용을 CLAUDE.md에 넣으면 매 턴 비용이지만, 스킬에 넣으면 관련된 세션에서만
+  비용이 발생한다. 내용이 길수록 차이가 커진다.
+how:
+  - '`.claude/skills/<이름>/SKILL.md`를 만들고 frontmatter에 name과 description을 쓴다.'
+  - description을 정확하게 쓴다 — 이게 언제 로드될지를 결정한다. "언제 쓰는지"를 명시한다.
+  - 본문에 실제 절차를 쓴다. 길어도 된다 — 필요할 때만 읽히니까.
+  - 참조 자료가 크면 같은 폴더에 별도 파일로 두고 SKILL.md에서 가리킨다.
+recipe: team-convention-skill
+verify: |
+  관련 없는 질문을 했을 때 스킬이 로드되지 않고, 관련 작업을 시켰을 때 로드되면
+  description이 잘 쓰인 것이다.
+sources:
+  - https://code.claude.com/docs/en/skills
+tags:
+  - skills
+  - context
+  - progressive-disclosure
+added: '2026-07-30'

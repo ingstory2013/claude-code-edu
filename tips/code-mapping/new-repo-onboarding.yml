@@ -1,0 +1,27 @@
+id: new-repo-onboarding
+title: 낯선 리포에 들어갈 때의 첫 30분 루틴
+category: code-mapping
+level: beginner
+summary: |
+  새 리포를 만나면 무작정 코드를 읽기 시작하기 쉽다.
+  진입점 → 데이터 흐름 → 관례 순으로 물어보면 훨씬 빨리 감을 잡고,
+  그 과정에서 나온 답을 CLAUDE.md로 남기면 다음 사람은 그마저도 건너뛴다.
+why: |
+  코드베이스 파악은 팀에서 반복적으로 발생하는 비용이다. 한 사람이 제대로
+  하고 결과를 남기면 그 뒤 모두가 아낀다.
+how:
+  - '`/init`으로 CLAUDE.md 초안을 만든다 — 리포를 훑어 기본 구조를 잡아준다.'
+  - '"이 앱은 어디서 시작해서 어디로 흘러?"로 진입점과 주요 경로를 묻는다.'
+  - '"이 리포에서 지켜야 하는 관례가 뭐야? 테스트·빌드는 어떻게 돌려?"를 묻는다.'
+  - 나온 답 중 항상 참인 것을 CLAUDE.md에 정리해 커밋한다.
+verify: |
+  다음 사람이 같은 리포에서 새 세션을 열었을 때 진입점·빌드 명령을
+  탐색 없이 바로 답하면 성공이다.
+sources:
+  - https://code.claude.com/docs/en/quickstart
+  - https://code.claude.com/docs/en/memory
+tags:
+  - onboarding
+  - claude-md
+  - init
+added: '2026-07-30'

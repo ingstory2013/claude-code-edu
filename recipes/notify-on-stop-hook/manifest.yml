@@ -1,0 +1,10 @@
+id: notify-on-stop-hook
+name: 작업 완료 시 데스크톱 알림
+files:
+  - src: settings.fragment.json
+    dest: .claude/settings.json
+    merge: json
+notes: |
+  macOS는 osascript, Linux는 notify-send를 자동으로 골라 씁니다.
+  둘 다 없으면 터미널 벨만 울립니다.
+  WSL이나 원격 SSH 환경에서는 벨만 동작할 수 있습니다.

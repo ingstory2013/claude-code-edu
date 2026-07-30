@@ -1,0 +1,26 @@
+id: checkpoint-rewind
+title: 잘못된 방향으로 갔을 때 /rewind로 되돌리기
+category: workflow
+level: beginner
+summary: |
+  작업이 엉뚱하게 흘러갔을 때 "아까 그 상태로 돌려줘"라고 말로 설명하면
+  잘 안 된다. `/rewind`는 이전 체크포인트로 대화와 파일 상태를 함께 되돌린다.
+  git에 커밋하지 않은 변경도 되돌릴 수 있다.
+why: |
+  잘못된 시도를 손으로 하나씩 되돌리는 것은 느리고 빠뜨리기 쉽다.
+  되돌릴 수 있다는 걸 알면 과감하게 시도해볼 수도 있게 된다.
+how:
+  - 방향이 틀렸다고 느끼면 더 진행하지 말고 `/rewind`를 실행한다.
+  - 돌아갈 지점을 고른다. 대화만, 파일만, 또는 둘 다 되돌릴 수 있다.
+  - 되돌린 뒤에는 무엇이 잘못됐는지 짚어주고 다시 시작한다.
+  - 큰 작업 전에는 여전히 커밋해두는 게 안전하다 — 체크포인트는 git을 대체하지 않는다.
+verify: |
+  작은 변경을 하나 시킨 뒤 `/rewind`로 되돌리고 `git status`로 파일이
+  원래대로 돌아왔는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/checkpointing
+tags:
+  - rewind
+  - recovery
+  - safety
+added: '2026-07-30'

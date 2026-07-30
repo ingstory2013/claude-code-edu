@@ -1,0 +1,27 @@
+id: decision-docs-in-repo
+title: '"왜 이렇게 짰는지"를 리포 안에 남겨 반복 설명을 없애기'
+category: code-mapping
+level: intermediate
+summary: |
+  코드는 무엇을 하는지 보여주지만 왜 그렇게 했는지는 보여주지 않는다.
+  그래서 Claude는 종종 "더 나은" 방식으로 되돌리자고 제안한다 — 이미 이유가 있어서
+  피한 방식으로. 결정 기록을 리포에 두면 그 왕복이 사라진다.
+why: |
+  같은 제안을 반복해서 거절하고 설명하는 것은 사람에게도 모델에게도 낭비다.
+  한 번 적어두면 끝난다.
+how:
+  - '`docs/decisions/` 같은 곳에 짧은 결정 기록을 남긴다 — 무엇을, 왜, 무엇을 대신 포기했는지.'
+  - 특히 "이상해 보이지만 이유가 있는" 부분을 우선 기록한다.
+  - CLAUDE.md에서 그 디렉터리를 가리켜 필요할 때 읽게 한다.
+  - 코드 주석은 제약 조건을 적을 때만 쓴다 — 히스토리는 문서에, 코드에는 지금 필요한 것만.
+verify: |
+  이미 거절했던 제안을 Claude가 다시 하는지 본다. 반복된다면 그 이유가
+  아직 어디에도 적혀 있지 않다는 신호다.
+sources:
+  - https://code.claude.com/docs/en/memory
+  - https://code.claude.com/docs/en/best-practices
+tags:
+  - documentation
+  - decisions
+  - claude-md
+added: '2026-07-30'

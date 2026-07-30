@@ -1,0 +1,27 @@
+{
+  "name": "claude-code-edu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "사내 #claude-code 채널에 Claude Code 활용법을 매일 1개 소개하고, 로컬에 바로 적용할 수 있게 도와주는 봇",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint:tips": "tsx src/lint-tips.ts",
+    "post": "tsx src/post-daily.ts",
+    "discover": "tsx src/discover.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "@slack/web-api": "^7.10.0",
+    "yaml": "^2.8.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.11",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

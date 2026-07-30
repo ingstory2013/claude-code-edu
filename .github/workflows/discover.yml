@@ -1,0 +1,94 @@
+name: 주간 신규 팁 탐색
+
+on:
+  schedule:
+    # UTC 월요일 01:00 = KST 월요일 10:00.
+    - cron: '0 1 * * 1'
+  workflow_dispatch:
+    inputs:
+      count:
+        description: '찾을 후보 개수 (1~10)'
+        required: false
+        type: string
+        default: '3'
+      dry_run:
+        description: '파일·PR 없이 후보만 로그로 확인'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: discover
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - name: 신규 기법 탐색
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 사용자 입력은 env로 넘긴다 — run 블록에 직접 넣으면 명령 주입이 가능하다.
+          INPUT_COUNT: ${{ inputs.count }}
+          INPUT_DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=(--count "${INPUT_COUNT:-3}")
+          if [ "${INPUT_DRY_RUN:-}" = "true" ]; then
+            args+=(--dry-run)
+          fi
+          npx tsx src/discover.ts "${args[@]}"
+
+      # 후보가 0건이면 drafts/에 아무것도 안 생긴다. 그때는 PR을 만들지 않는다.
+      - name: 드래프트 생성 여부 확인
+        id: check
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          if [ -z "$(git status --porcelain drafts/)" ]; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            echo "새 드래프트가 없습니다. PR을 만들지 않습니다."
+          else
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 리뷰용 PR 생성
+        if: ${{ inputs.dry_run != true && steps.check.outputs.created == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          branch="discover/$(date -u +%Y-%m-%d)-$GITHUB_RUN_ID"
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b "$branch"
+
+          # PR 본문은 discover.ts가 만들어 둔다. 리포에는 커밋하지 않는다.
+          body_file="$(mktemp)"
+          if [ -f drafts/.pr-body.md ]; then
+            cp drafts/.pr-body.md "$body_file"
+            rm drafts/.pr-body.md
+          else
+            echo '신규 팁 후보입니다. 검토 후 tips/ 로 옮겨 주세요.' > "$body_file"
+          fi
+
+          count=$(git status --porcelain drafts/ | wc -l | tr -d ' ')
+          git add drafts/
+          git commit -m "content: 신규 팁 후보 ${count}건 ($(date -u +%Y-%m-%d))"
+          git push -u origin "$branch"
+
+          gh pr create \
+            --title "팁 후보 ${count}건 ($(date -u +%Y-%m-%d))" \
+            --body-file "$body_file" \
+            --base "${GITHUB_REF_NAME}"

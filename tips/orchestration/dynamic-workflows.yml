@@ -1,0 +1,27 @@
+id: dynamic-workflows
+title: 반복되는 다단계 작업을 워크플로로 고정하기
+category: orchestration
+level: advanced
+summary: |
+  "조사 → 계획 → 구현 → 검증"처럼 매번 같은 단계를 밟는 작업이 있다.
+  워크플로는 그 단계와 각 단계에서 어떤 서브에이전트를 어떻게 쓸지를 정의해 둔다.
+  매번 오케스트레이션을 말로 설명하는 대신 워크플로를 부르면 된다.
+why: |
+  좋은 오케스트레이션 패턴을 찾아도 말로 매번 재현하면 조금씩 달라진다.
+  워크플로로 굳혀두면 팀 전체가 같은 품질로 재현한다.
+how:
+  - 이미 여러 번 반복한 다단계 작업을 하나 고른다 — 그게 좋은 첫 워크플로다.
+  - 단계를 나누고, 각 단계에서 어떤 에이전트가 무엇을 받아 무엇을 내놓는지 정한다.
+  - 검증 단계를 반드시 넣는다. 별도 컨텍스트의 검증자가 자기 검토보다 낫다.
+  - 팀에 공유하고, 실제로 쓰면서 어긋나는 단계를 다듬는다.
+verify: |
+  워크플로를 실행했을 때 정의한 단계 순서대로 진행되고, 각 단계의 산출물이
+  다음 단계로 제대로 넘어가는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/workflows
+  - https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code
+tags:
+  - workflows
+  - subagents
+  - repeatability
+added: '2026-07-30'

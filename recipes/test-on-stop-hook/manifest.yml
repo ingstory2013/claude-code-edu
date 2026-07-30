@@ -1,0 +1,11 @@
+id: test-on-stop-hook
+name: 작업 종료 전 테스트 자동 실행
+files:
+  - src: settings.fragment.json
+    dest: .claude/settings.json
+    merge: json
+notes: |
+  기본값은 `npm test`입니다. 설치 후 프로젝트에 맞게 command를 바꾸세요.
+  예) pytest -q  /  go test ./...  /  cargo test
+  package.json에 test 스크립트가 없으면 조용히 넘어갑니다.
+  테스트가 느리면 전체 대신 변경 범위만 도는 명령으로 바꾸는 게 좋습니다.

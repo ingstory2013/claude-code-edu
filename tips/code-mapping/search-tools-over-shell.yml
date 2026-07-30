@@ -1,0 +1,25 @@
+id: search-tools-over-shell
+title: 검색은 셸 find/grep 대신 전용 도구로 시키기
+category: code-mapping
+level: beginner
+summary: |
+  Claude에게는 파일 패턴 매칭(Glob)과 내용 검색(Grep) 전용 도구가 있다.
+  셸에서 `find`나 `grep`을 돌리는 것보다 결과가 정돈되고,
+  경로가 클릭 가능한 형태로 나와 후속 작업이 매끄럽다.
+why: |
+  셸 출력은 잡음이 많고(권한 오류, 바이너리 매치, node_modules) 그 잡음이
+  전부 컨텍스트를 차지한다. 전용 도구는 그런 것들을 알아서 걸러낸다.
+how:
+  - '"grep으로 찾아줘" 대신 그냥 "이 패턴을 쓰는 곳 찾아줘"라고 하면 알아서 적절한 도구를 쓴다.'
+  - 셸 명령을 굳이 지정하려던 습관이 있다면 도구 이름을 명시한다 — "Grep으로".
+  - 파일 타입이나 경로로 범위를 좁혀 주면 결과가 더 깨끗해진다.
+  - 셸이 정말 필요한 경우(git 명령, 빌드 실행)에만 Bash를 쓰게 한다.
+verify: |
+  검색 결과에 node_modules나 빌드 산출물이 섞여 나온다면 범위 지정이 빠진 것이다.
+sources:
+  - https://code.claude.com/docs/en/tools-reference
+tags:
+  - search
+  - tools
+  - grep
+added: '2026-07-30'

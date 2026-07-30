@@ -1,0 +1,25 @@
+id: statusline-context
+title: 상태줄에 지금 필요한 정보 띄우기
+category: automation
+level: beginner
+summary: |
+  브랜치를 착각하거나 어느 모델로 돌고 있는지 모른 채 작업하는 일이 생긴다.
+  상태줄을 커스터마이즈하면 그런 정보가 항상 눈앞에 있다.
+  컨텍스트를 쓰지 않고 화면에만 표시되므로 비용이 없다.
+why: |
+  "그거 어느 브랜치에서 했더라"를 나중에 되짚는 비용이,
+  항상 표시해두는 비용보다 훨씬 크다.
+how:
+  - 설치 명령으로 기본 상태줄 스크립트를 넣는다 (디렉터리·브랜치·모델 표시).
+  - 필요한 정보를 추가한다 — 실행 환경, 활성 프로필 등.
+  - 스크립트는 빨라야 한다. 느린 명령을 넣으면 프롬프트가 매번 지연된다.
+recipe: statusline-basic
+verify: |
+  세션을 다시 열면 상태줄에 정보가 표시된다. 표시가 늦으면 스크립트가 느린 것이다.
+sources:
+  - https://code.claude.com/docs/en/statusline
+tags:
+  - statusline
+  - settings
+  - ergonomics
+added: '2026-07-30'

@@ -1,0 +1,11 @@
+explore-agent
+format-on-edit-hook
+map-command
+notify-on-stop-hook
+permission-allowlist
+repeat-prompt-command
+review-subagent
+session-start-hook
+statusline-basic
+team-convention-skill
+test-on-stop-hook

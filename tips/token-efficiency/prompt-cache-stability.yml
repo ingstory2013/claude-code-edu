@@ -1,0 +1,27 @@
+id: prompt-cache-stability
+title: 프롬프트 앞부분을 안 바꿔야 캐시가 산다
+category: token-efficiency
+level: advanced
+summary: |
+  프롬프트 캐시는 앞에서부터 바이트가 일치하는 만큼만 재사용된다.
+  CLAUDE.md에 현재 시각이나 브랜치명 같은 매번 바뀌는 값을 넣으면
+  그 뒤 전체가 캐시 미스가 된다. 안정적인 것을 앞에, 변하는 것을 뒤에 둔다.
+why: |
+  캐시 읽기는 원가의 10분의 1 수준이다. 앞부분 한 글자 때문에 이걸 통째로
+  날리는 건 가장 비싼 실수다.
+how:
+  - CLAUDE.md에서 매번 달라지는 값을 찾아 없앤다 — 날짜, 시각, 브랜치명, 사용자명.
+  - 그런 정보가 필요하면 CLAUDE.md 대신 그때그때 프롬프트나 훅으로 전달한다.
+  - MCP 서버 목록을 세션 중간에 바꾸지 않는다 — 툴 정의는 프리픽스의 맨 앞이다.
+  - 세션 중간에 모델을 바꾸지 않는다. 캐시는 모델별로 따로다.
+verify: |
+  `/cost`로 캐시 읽기 토큰이 실제로 잡히는지 본다. 반복 요청에서 캐시 읽기가
+  계속 0이면 프리픽스에 매번 바뀌는 값이 있는 것이다.
+sources:
+  - https://code.claude.com/docs/en/prompt-caching
+  - https://code.claude.com/docs/en/costs
+tags:
+  - caching
+  - cost
+  - claude-md
+added: '2026-07-30'

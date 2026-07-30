@@ -1,0 +1,27 @@
+id: plan-mode-first
+title: 큰 작업은 계획 모드로 먼저 합의하기
+category: orchestration
+level: beginner
+summary: |
+  복잡한 작업을 바로 시키면 절반쯤 진행된 뒤에야 방향이 틀렸다는 걸 알게 된다.
+  계획 모드(Shift+Tab 두 번)에서는 Claude가 코드를 건드리지 않고 계획만 세운다.
+  계획을 읽고 고친 뒤 승인하면 그때부터 실행이 시작된다.
+why: |
+  잘못된 방향으로 30분 작업한 것을 되돌리는 비용이, 계획을 2분 읽는 비용보다 훨씬 크다.
+  특히 여러 파일을 건드리는 작업에서 차이가 크다.
+how:
+  - Shift+Tab을 두 번 눌러 계획 모드로 들어간다.
+  - 작업을 설명하면 Claude가 파일을 읽고 계획을 제시한다 (수정은 하지 않는다).
+  - 계획에서 빠졌거나 잘못된 부분을 지적하고 다시 세우게 한다.
+  - 납득되면 승인한다. 그때부터 실제 편집이 시작된다.
+verify: |
+  계획 모드에서는 파일이 수정되지 않는다. `git status`로 확인해 보면 승인 전까지
+  작업 트리가 깨끗하게 유지된다.
+sources:
+  - https://code.claude.com/docs/en/permission-modes
+  - https://code.claude.com/docs/en/best-practices
+tags:
+  - planning
+  - permission-modes
+  - review
+added: '2026-07-30'

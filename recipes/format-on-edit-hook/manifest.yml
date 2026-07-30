@@ -1,0 +1,12 @@
+id: format-on-edit-hook
+name: 파일 편집 후 자동 포맷 훅
+files:
+  - src: settings.fragment.json
+    dest: .claude/settings.json
+    merge: json
+notes: |
+  Write/Edit 직후 prettier가 해당 파일만 포맷합니다. prettier가 없거나 대상이
+  아닌 파일이면 조용히 넘어갑니다 (`|| true`).
+  훅이 편집된 파일 경로를 읽는 데 jq를 씁니다 — jq가 없으면 훅이 동작하지 않습니다.
+  다른 포매터를 쓴다면 설치 후 settings.json의 command를 바꾸세요.
+  예) Python: `command` 를 `ruff format "$file" || true` 로.

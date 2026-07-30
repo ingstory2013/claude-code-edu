@@ -1,0 +1,27 @@
+id: plugin-marketplace
+title: 플러그인으로 남이 만든 설정 묶음 가져다 쓰기
+category: workflow
+level: intermediate
+summary: |
+  스킬·커맨드·에이전트·훅을 하나씩 만드는 대신, 이미 잘 만들어진 묶음을
+  플러그인으로 설치할 수 있다. 사내 표준 설정을 플러그인으로 배포하면
+  새로 합류한 사람이 명령 한 줄로 환경을 맞출 수 있다.
+why: |
+  같은 설정을 각자 수동으로 맞추면 반드시 어긋난다.
+  플러그인은 버전이 있고 업데이트가 전파된다.
+how:
+  - '`/plugin`으로 설치된 플러그인과 마켓플레이스를 확인한다.'
+  - 마켓플레이스를 추가한 뒤 필요한 플러그인을 설치한다.
+  - 사내 표준을 만들 거라면 리포 하나를 마켓플레이스로 구성한다.
+  - 설치 전에 무엇이 들어오는지 확인한다 — 훅과 권한 설정도 함께 들어올 수 있다.
+verify: |
+  설치 후 `/plugin`에 목록이 뜨고, 포함된 커맨드·에이전트가 실제로 호출되는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/plugins
+  - https://code.claude.com/docs/en/plugin-marketplaces
+  - https://code.claude.com/docs/en/discover-plugins
+tags:
+  - plugins
+  - team
+  - distribution
+added: '2026-07-30'

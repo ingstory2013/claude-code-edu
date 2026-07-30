@@ -1,0 +1,8 @@
+id: explore-agent
+name: 탐색 전용 Explore 서브에이전트
+files:
+  - src: agents/explore.md
+    dest: .claude/agents/explore.md
+notes: |
+  설치 후 "Explore 에이전트로 인증 로직 찾아줘"처럼 이름을 지정해 부르면 됩니다.
+  프로젝트 단위로만 쓰고 싶으면 --project 옵션을 붙여 설치하세요.

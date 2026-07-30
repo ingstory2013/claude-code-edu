@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f package.json ] || exit 0; jq -e '.scripts.test' package.json >/dev/null 2>&1 || exit 0; npm test 2>&1 | tail -30"
+          }
+        ]
+      }
+    ]
+  }
+}

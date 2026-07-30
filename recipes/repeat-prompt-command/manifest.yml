@@ -1,0 +1,9 @@
+id: repeat-prompt-command
+name: 슬래시 커맨드 템플릿 (/explain)
+files:
+  - src: commands/explain.md
+    dest: .claude/commands/explain.md
+notes: |
+  동작하는 예시 커맨드입니다: `/explain src/auth.ts` 처럼 씁니다.
+  이 파일을 복사해 팀에서 자주 쓰는 프롬프트를 커맨드로 만드세요.
+  `$ARGUMENTS` 자리에 사용자가 입력한 인자가 들어갑니다.

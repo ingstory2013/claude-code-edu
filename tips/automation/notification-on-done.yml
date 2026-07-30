@@ -1,0 +1,26 @@
+id: notification-on-done
+title: 긴 작업이 끝나면 알림 받기
+category: automation
+level: beginner
+summary: |
+  긴 작업을 돌려놓고 다른 일을 하다 보면 언제 끝났는지 놓친다.
+  Stop 훅에 알림 명령을 걸어두면 작업이 끝나거나 승인이 필요할 때 바로 알 수 있다.
+why: |
+  백그라운드로 돌려도 끝난 걸 10분 뒤에 알면 그 10분은 그냥 손해다.
+  병렬 작업을 많이 굴릴수록 효과가 커진다.
+how:
+  - 아래 설치 명령으로 Stop 훅을 넣는다.
+  - macOS는 `osascript`, Linux는 `notify-send`를 쓴다 — 설치 후 환경에 맞게 고른다.
+  - 터미널 벨(`printf '\a'`)만으로도 충분한 경우가 많다.
+  - 자리를 오래 비운다면 알림 대신 원격 제어로 이어받는 방법을 검토한다.
+recipe: notify-on-stop-hook
+verify: |
+  짧은 작업을 하나 시켜보고 완료 시점에 알림이 오는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/hooks
+  - https://code.claude.com/docs/en/remote-control
+tags:
+  - hooks
+  - notification
+  - workflow
+added: '2026-07-30'
