@@ -1,0 +1,24 @@
+id: output-styles
+title: 출력 스타일로 응답 형식을 취향에 맞추기
+category: workflow
+level: beginner
+summary: |
+  응답이 너무 장황하거나 반대로 너무 짧다고 느낀다면 매번 "짧게 써줘"라고
+  말할 필요가 없다. 출력 스타일을 설정하면 그 취향이 계속 유지된다.
+why: |
+  같은 요청을 매 세션 반복하는 것은 잊기도 쉽고 일관성도 없다.
+  한 번 설정하면 끝난다.
+how:
+  - 현재 응답에서 불편한 지점을 구체적으로 정한다 — 서론이 길다, 표를 너무 쓴다 등.
+  - 출력 스타일을 설정해 원하는 형식을 명시한다.
+  - '"이렇게 하지 마라"보다 "이렇게 해라"가 더 잘 먹는다. 좋은 예시를 함께 넣는다.'
+  - 작업 유형별로 다른 스타일이 필요하면 여러 개를 두고 전환한다.
+verify: |
+  같은 질문을 스타일 적용 전후로 던져 응답 형식이 실제로 달라지는지 비교한다.
+sources:
+  - https://code.claude.com/docs/en/output-styles
+tags:
+  - output-styles
+  - ergonomics
+  - customization
+added: '2026-07-30'

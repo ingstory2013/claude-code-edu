@@ -1,0 +1,26 @@
+id: slash-command-repeated-prompts
+title: 세 번 이상 쓴 프롬프트는 슬래시 커맨드로 만들기
+category: workflow
+level: beginner
+summary: |
+  같은 요청을 매번 다시 타이핑하면 조금씩 달라지고 품질도 들쭉날쭉해진다.
+  `.claude/commands/`에 마크다운 파일 하나를 두면 `/이름`으로 부를 수 있는
+  커맨드가 된다. 팀에 공유하면 모두가 같은 품질로 쓴다.
+why: |
+  좋은 프롬프트를 한 번 다듬어 고정하는 것이, 매번 즉흥적으로 쓰는 것보다
+  거의 항상 낫다. 만드는 데 2분이면 된다.
+how:
+  - 최근에 반복해서 쓴 프롬프트를 하나 떠올린다.
+  - '`.claude/commands/<이름>.md`에 그 내용을 넣는다.'
+  - '`$ARGUMENTS`로 인자를 받게 하면 `/커맨드 대상`처럼 쓸 수 있다.'
+  - 팀 전체가 쓸 것이면 리포에 커밋한다. 개인용은 `~/.claude/commands/`에 둔다.
+recipe: repeat-prompt-command
+verify: |
+  `/`를 입력했을 때 목록에 새 커맨드가 뜨고, 실행하면 의도한 프롬프트가 실행된다.
+sources:
+  - https://code.claude.com/docs/en/commands
+tags:
+  - slash-commands
+  - reuse
+  - team
+added: '2026-07-30'

@@ -1,0 +1,8 @@
+id: review-subagent
+name: 코드 리뷰 전담 서브에이전트
+files:
+  - src: agents/reviewer.md
+    dest: .claude/agents/reviewer.md
+notes: |
+  구현이 끝난 뒤 "reviewer 에이전트로 이번 변경 검토해줘"처럼 부르세요.
+  깨끗한 컨텍스트에서 diff만 보고 판단하므로 작성자가 놓친 것을 잘 잡습니다.

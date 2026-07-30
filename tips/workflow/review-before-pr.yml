@@ -1,0 +1,26 @@
+id: review-before-pr
+title: PR 올리기 전에 자기 변경을 먼저 리뷰시키기
+category: workflow
+level: beginner
+summary: |
+  리뷰어가 자명한 문제를 지적하는 데 시간을 쓰면 정작 설계 논의를 할 여유가 없다.
+  PR을 올리기 전에 변경 내용을 한 번 검토시키면 그런 지적이 대부분 사라지고
+  리뷰가 실제로 중요한 것에 집중된다.
+why: |
+  리뷰 왕복 한 번은 보통 하루를 잡아먹는다. 올리기 전 5분으로 그 한 바퀴를 줄일 수 있다.
+how:
+  - 커밋 전에 "이번 변경 리뷰해줘"로 diff를 검토시킨다.
+  - 무엇을 하려던 변경인지 함께 알려준다 — 의도를 알아야 누락을 잡는다.
+  - '"심각한 것만"이라고 제한하지 않는다. 다 받아본 뒤 무엇을 고칠지는 직접 정한다.'
+  - 더 엄밀한 검토가 필요하면 깨끗한 컨텍스트의 리뷰 서브에이전트를 쓴다.
+verify: |
+  실제 리뷰에서 나온 지적 유형을 몇 주간 관찰한다. 단순 실수 지적이 줄고
+  설계 논의가 늘면 효과가 있는 것이다.
+sources:
+  - https://code.claude.com/docs/en/common-workflows
+  - https://code.claude.com/docs/en/code-review
+tags:
+  - review
+  - pull-request
+  - quality
+added: '2026-07-30'

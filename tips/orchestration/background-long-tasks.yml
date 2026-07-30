@@ -1,0 +1,25 @@
+id: background-long-tasks
+title: 긴 빌드·테스트는 백그라운드로 돌리고 계속 일하기
+category: orchestration
+level: beginner
+summary: |
+  5분짜리 빌드를 기다리는 동안 세션이 멈춰 있을 이유가 없다.
+  백그라운드로 실행하면 Claude가 다른 작업을 이어가고, 명령이 끝나면 결과를 받아 이어서 처리한다.
+why: |
+  대기 시간은 순수한 손실이다. 특히 "빌드 → 실패 확인 → 수정" 루프에서
+  기다리는 시간이 실제 작업 시간보다 긴 경우가 많다.
+how:
+  - '"이 테스트는 오래 걸리니 백그라운드로 돌리고 그 동안 문서를 정리해줘"처럼 지시한다.'
+  - 실행 중인 백그라운드 작업은 Ctrl+B로 확인한다.
+  - 완료되면 Claude가 알아서 결과를 읽고 이어서 처리한다.
+  - 결과에 의존하는 작업은 백그라운드로 돌리지 않는다 — 어차피 기다려야 한다.
+verify: |
+  백그라운드로 보낸 직후 Claude가 멈추지 않고 다른 작업을 계속하면 제대로 동작한 것이다.
+sources:
+  - https://code.claude.com/docs/en/common-workflows
+  - https://code.claude.com/docs/en/interactive-mode
+tags:
+  - background
+  - build
+  - latency
+added: '2026-07-30'

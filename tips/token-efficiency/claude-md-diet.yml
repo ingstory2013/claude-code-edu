@@ -1,0 +1,27 @@
+id: claude-md-diet
+title: CLAUDE.md는 매 요청 비용이다 — 짧게 유지하기
+category: token-efficiency
+level: intermediate
+summary: |
+  CLAUDE.md는 모든 요청의 프리픽스에 들어간다. 500줄짜리 CLAUDE.md는 그 세션의
+  모든 턴에서 500줄만큼 비용을 낸다. 항상 필요한 규칙만 남기고 나머지는
+  필요할 때만 로드되는 곳으로 옮긴다.
+why: |
+  CLAUDE.md가 비대해지는 건 자연스럽다 — 문제가 생길 때마다 한 줄씩 추가하기 때문이다.
+  하지만 "가끔 필요한 상세"가 "항상 내는 비용"이 되면 손해다.
+how:
+  - '`/context`로 CLAUDE.md가 실제로 몇 토큰인지 확인한다.'
+  - 특정 작업에서만 필요한 내용은 스킬로 옮긴다 — 관련될 때만 로드된다.
+  - 특정 디렉터리에서만 통하는 규칙은 그 디렉터리의 CLAUDE.md로 내린다.
+  - 루트에는 항상 참인 것만 남긴다 — 빌드·테스트 명령, 아키텍처 지도, 절대 규칙.
+verify: |
+  정리 후 `/context`에서 CLAUDE.md 항목의 토큰 수를 비교한다. 동시에 새 세션에서
+  기존 작업을 시켜보고 필요한 규칙이 여전히 지켜지는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/memory
+  - https://code.claude.com/docs/en/skills
+tags:
+  - claude-md
+  - context
+  - skills
+added: '2026-07-30'

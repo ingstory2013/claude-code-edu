@@ -1,0 +1,10 @@
+id: permission-allowlist
+name: 안전한 읽기 전용 명령 허용 목록
+files:
+  - src: settings.fragment.json
+    dest: .claude/settings.json
+    merge: json
+notes: |
+  조회·테스트·린트처럼 되돌릴 필요가 없는 명령만 허용합니다.
+  push, 배포, 삭제, 마이그레이션은 일부러 넣지 않았습니다 — 그건 계속 물어봐야 합니다.
+  프로젝트 빌드 명령이 다르면 설치 후 목록을 조정하세요.

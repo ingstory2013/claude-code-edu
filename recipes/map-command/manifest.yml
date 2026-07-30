@@ -1,0 +1,8 @@
+id: map-command
+name: /map — 아키텍처 요약 생성 커맨드
+files:
+  - src: commands/map.md
+    dest: .claude/commands/map.md
+notes: |
+  `/map` 으로 리포 전체를, `/map src/payments` 로 특정 경로만 요약합니다.
+  결과가 쓸 만하면 해당 디렉터리의 CLAUDE.md에 붙여넣어 다음부터 생성을 건너뛰세요.

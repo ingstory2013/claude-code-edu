@@ -1,0 +1,25 @@
+id: github-actions-review
+title: PR 리뷰를 GitHub Actions로 자동화하기
+category: automation
+level: intermediate
+summary: |
+  리뷰어가 붙기 전에 자명한 문제를 걸러내면 리뷰 사이클이 한 바퀴 줄어든다.
+  GitHub Actions에서 Claude Code를 돌려 PR마다 자동 리뷰를 남기게 할 수 있다.
+why: |
+  "이거 null 체크 빠졌어요" 같은 지적을 사람이 하는 것은 아깝다.
+  사람은 설계와 맥락을 봐야 한다.
+how:
+  - 리포에 Claude Code용 Actions 워크플로를 추가한다.
+  - 무엇을 볼지 명시한다 — 프로젝트 관례, 자주 나는 실수 유형.
+  - 심각도 필터를 처음부터 좁게 걸지 않는다. "중요한 것만"이라고 하면 실제로 많이 걸러낸다.
+  - 노이즈가 많으면 범위를 좁힌다 — 변경된 파일만, 특정 디렉터리만.
+verify: |
+  테스트 PR을 하나 올려 리뷰 코멘트가 달리는지, 지적 내용이 실제로 유효한지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/github-actions
+  - https://code.claude.com/docs/en/code-review
+tags:
+  - ci
+  - github
+  - review
+added: '2026-07-30'

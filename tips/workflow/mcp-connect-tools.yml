@@ -1,0 +1,26 @@
+id: mcp-connect-tools
+title: MCP로 사내 도구를 Claude에 연결하기
+category: workflow
+level: intermediate
+summary: |
+  이슈 트래커나 문서 저장소의 내용을 복사해 붙여넣고 있다면 MCP로 연결할 수 있다.
+  연결하면 Claude가 직접 티켓을 읽고 상태를 갱신하거나 문서를 조회한다.
+  복사·붙여넣기 왕복이 사라진다.
+why: |
+  사람이 중간에서 데이터를 나르는 단계는 느리고 빠뜨리기 쉽다.
+  특히 "티켓 읽고 → 구현하고 → 티켓 갱신" 같은 흐름에서 차이가 크다.
+how:
+  - 자주 복사해 오는 데이터의 출처를 찾는다 — Jira, Linear, Drive, 사내 API 등.
+  - 해당 MCP 서버를 연결한다. 프로젝트 단위로 붙이면 관련 없는 세션에 부담을 주지 않는다.
+  - '`/mcp`로 연결 상태와 사용 가능한 툴을 확인한다.'
+  - 쓰기 권한이 있는 서버는 권한 설정을 좁혀둔다.
+verify: |
+  `/mcp`에 서버가 connected로 표시되고, 실제로 해당 데이터를 조회하는 요청이 성공하는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/mcp-quickstart
+  - https://code.claude.com/docs/en/mcp
+tags:
+  - mcp
+  - integration
+  - tools
+added: '2026-07-30'

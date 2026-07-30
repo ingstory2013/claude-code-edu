@@ -1,0 +1,27 @@
+id: format-on-edit-hook
+title: 편집할 때마다 자동 포맷되게 하기
+category: automation
+level: beginner
+summary: |
+  포맷이 안 맞은 채로 커밋되면 리뷰에서 지적받고 다시 고치게 된다.
+  PostToolUse 훅으로 Write/Edit 직후 포매터를 돌리면 그 왕복이 사라진다.
+  Claude에게 "포맷해줘"라고 매번 부탁할 필요도 없다.
+why: |
+  프롬프트로 "항상 포맷해"라고 지시하는 것보다 훅이 확실하다.
+  훅은 하네스가 실행하므로 모델이 잊어버릴 여지가 없다.
+how:
+  - 아래 설치 명령으로 훅을 넣는다 (prettier 기준).
+  - 다른 포매터를 쓴다면 설치 후 settings.json의 command만 바꾼다.
+  - 포매터가 없거나 대상 파일이 아니면 조용히 넘어가도록 `|| true`가 붙어 있다.
+  - 프로젝트별로만 적용하려면 `--project` 옵션을 붙여 설치한다.
+recipe: format-on-edit-hook
+verify: |
+  포맷이 깨진 코드를 일부러 쓰게 한 뒤 파일을 열어본다. 저장 직후 정리돼 있으면 동작한 것이다.
+sources:
+  - https://code.claude.com/docs/en/hooks
+  - https://code.claude.com/docs/en/hooks-guide
+tags:
+  - hooks
+  - formatting
+  - automation
+added: '2026-07-30'

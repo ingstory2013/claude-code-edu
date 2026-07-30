@@ -1,0 +1,27 @@
+id: scoped-file-reads
+title: 파일을 통째로 읽히지 말고 범위를 좁혀 주기
+category: token-efficiency
+level: beginner
+summary: |
+  "이 파일 봐줘"는 3000줄짜리 파일이면 3000줄을 컨텍스트에 넣는다.
+  실제로 필요한 건 대개 함수 하나다. Grep으로 위치를 먼저 찾게 하거나
+  줄 범위를 지정하면 같은 답을 훨씬 적은 토큰으로 얻는다.
+why: |
+  한 번 컨텍스트에 들어온 내용은 그 세션 내내 따라다닌다.
+  큰 파일 두어 개를 통째로 읽으면 그 세션의 여유가 거의 사라진다.
+how:
+  - '"handleAuth 함수 부분만 봐줘"처럼 대상을 좁혀 말한다.'
+  - 어디 있는지 모르면 "먼저 grep으로 찾고 해당 부분만 읽어줘"라고 지시한다.
+  - 큰 로그·데이터 파일은 읽히지 말고 `grep`·`tail` 결과만 보게 한다.
+  - 전체 구조 파악이 목적이라면 Explore 서브에이전트에 맡겨 요약만 받는다.
+verify: |
+  `/context`에서 읽은 파일이 차지하는 토큰을 확인한다. 한 파일이 수천 토큰을
+  차지하고 있다면 범위 지정이 안 된 것이다.
+sources:
+  - https://code.claude.com/docs/en/tools-reference
+  - https://code.claude.com/docs/en/best-practices
+tags:
+  - context
+  - grep
+  - reading
+added: '2026-07-30'

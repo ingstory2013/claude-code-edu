@@ -1,0 +1,26 @@
+id: goal-for-long-tasks
+title: 긴 작업은 목표를 먼저 고정하고 시작하기
+category: orchestration
+level: intermediate
+summary: |
+  여러 턴에 걸쳐 조금씩 요구사항을 흘리면 방향이 표류하고 토큰도 더 쓴다.
+  `/goal`로 "무엇이 완료인지"를 먼저 못 박아두면, 긴 자율 작업 내내 그 기준이
+  유지되고 중간에 딴 길로 새지 않는다.
+why: |
+  최신 모델은 처음 한 턴에 과제 명세를 충분히 받았을 때 가장 잘 동작한다.
+  애매한 지시를 여러 턴에 나눠 주는 방식이 오히려 성능과 효율을 떨어뜨린다.
+how:
+  - 작업 시작 전에 `/goal`로 목표와 완료 조건을 적는다.
+  - 완료 조건은 검증 가능하게 쓴다 — "잘 동작할 것"이 아니라 "테스트 X가 통과할 것".
+  - 제약도 함께 적는다 (건드리면 안 되는 파일, 유지해야 할 API 등).
+  - 그다음 작업을 지시하고, 중간 개입은 방향이 실제로 틀렸을 때만 한다.
+verify: |
+  긴 작업 후 결과물이 처음 적은 완료 조건을 충족하는지 항목별로 대조한다.
+sources:
+  - https://code.claude.com/docs/en/goal
+  - https://code.claude.com/docs/en/best-practices
+tags:
+  - goal
+  - long-horizon
+  - specification
+added: '2026-07-30'

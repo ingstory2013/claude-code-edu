@@ -1,0 +1,10 @@
+id: team-convention-skill
+name: 팀 관례 스킬 템플릿
+files:
+  - src: skills/team-conventions/SKILL.md
+    dest: .claude/skills/team-conventions/SKILL.md
+notes: |
+  이건 템플릿입니다 — 설치 후 반드시 내용을 팀 실제 관례로 바꾸세요.
+  특히 frontmatter의 description을 정확히 쓰는 게 중요합니다. 이 문장이
+  "언제 이 스킬을 로드할지"를 결정합니다.
+  팀 전체가 쓸 것이면 --project 로 설치해 리포에 커밋하세요.

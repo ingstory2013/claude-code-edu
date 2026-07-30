@@ -1,0 +1,26 @@
+id: mcp-server-pruning
+title: 안 쓰는 MCP 서버는 끄기 — 툴 정의는 매 요청 비용이다
+category: token-efficiency
+level: intermediate
+summary: |
+  연결된 MCP 서버의 툴 정의는 전부 매 요청 프리픽스에 들어간다.
+  서버 하나가 툴 30개를 노출하면 그 30개의 스키마가 항상 실려 다닌다.
+  실제로 쓰는 서버만 남기면 눈에 띄게 가벼워진다.
+why: |
+  MCP 서버는 한번 연결해두고 잊기 쉽다. 그런데 비용은 쓸 때가 아니라
+  연결돼 있는 내내 발생한다.
+how:
+  - '`/context`에서 툴 정의가 차지하는 토큰을 확인한다.'
+  - '`/mcp`로 현재 연결된 서버를 확인한다.'
+  - 이번 프로젝트에서 안 쓰는 서버는 설정에서 뺀다. 전역 대신 프로젝트별로 붙이면 더 좋다.
+  - 툴이 아주 많은 서버는 필요한 툴만 노출하도록 설정할 수 있는지 확인한다.
+verify: |
+  서버를 뺀 뒤 `/context`에서 툴 정의 토큰이 줄었는지 확인한다.
+sources:
+  - https://code.claude.com/docs/en/mcp
+  - https://code.claude.com/docs/en/costs
+tags:
+  - mcp
+  - context
+  - tools
+added: '2026-07-30'

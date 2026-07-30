@@ -1,0 +1,25 @@
+id: compact-at-boundaries
+title: /compact은 작업이 끝난 경계에서 실행하기
+category: token-efficiency
+level: beginner
+summary: |
+  컨텍스트가 꽉 차면 자동으로 압축되지만, 그 시점은 대개 작업 한복판이라
+  방금 알아낸 중요한 맥락이 요약에 묻힌다. 작업이 하나 끝난 직후에 직접
+  `/compact`을 실행하면 요약이 깔끔하게 남고 다음 작업을 온전한 컨텍스트로 시작한다.
+why: |
+  압축의 품질은 언제 하느냐에 달렸다. 작업 경계는 "지금까지의 결론"이 가장
+  명확한 지점이라 요약이 잘 나온다.
+how:
+  - 기능 하나를 끝내고 커밋한 직후처럼 자연스러운 경계를 찾는다.
+  - '`/compact`을 실행한다. 남기고 싶은 게 있으면 "테스트 전략은 유지해줘"처럼 덧붙인다.'
+  - 완전히 다른 작업으로 넘어갈 때는 압축 대신 `/clear`로 아예 비운다.
+  - 자동 압축이 자주 뜬다면 압축이 아니라 CLAUDE.md·MCP 툴 정의를 먼저 줄인다.
+verify: |
+  `/compact` 후 `/context`를 보면 대화 내역이 차지하던 토큰이 크게 줄어 있다.
+sources:
+  - https://code.claude.com/docs/en/context-window
+tags:
+  - compact
+  - context
+  - session
+added: '2026-07-30'

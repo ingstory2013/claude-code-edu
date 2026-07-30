@@ -1,0 +1,28 @@
+id: review-subagent
+title: 검증은 별도 컨텍스트의 서브에이전트에게 맡기기
+category: orchestration
+level: intermediate
+summary: |
+  방금 코드를 쓴 에이전트에게 그 코드를 검토시키면 자기 가정을 그대로 물려받는다.
+  깨끗한 컨텍스트의 리뷰 서브에이전트는 결과물만 보고 판단하므로 작성자가
+  놓친 것을 훨씬 잘 잡는다.
+why: |
+  "왜 이렇게 짰는지" 아는 상태에서는 그 선택을 의심하기 어렵다.
+  writer-verifier 분리는 이 편향을 구조적으로 없앤다.
+how:
+  - 구현이 끝나면 변경 내용을 리뷰 전담 서브에이전트에 넘긴다.
+  - 리뷰어에게는 "무엇을 만들려 했는지"와 diff만 준다. 구현 과정의 대화는 주지 않는다.
+  - 리뷰어가 "심각한 것만 보고하라"는 지시를 받으면 실제로 그렇게 걸러내므로,
+    일단 다 보고하게 하고 우선순위는 나중에 매긴다.
+  - 지적받은 내용은 원래 세션에서 고친다.
+recipe: review-subagent
+verify: |
+  리뷰어가 구현 세션에서 언급되지 않았던 문제를 지적하면 컨텍스트 분리가 작동한 것이다.
+sources:
+  - https://code.claude.com/docs/en/sub-agents
+  - https://code.claude.com/docs/en/ultrareview
+tags:
+  - subagents
+  - review
+  - verification
+added: '2026-07-30'
