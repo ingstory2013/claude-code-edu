@@ -1,9 +1,15 @@
 name: 주간 신규 팁 탐색
 
+# 주간 자동 탐색은 중지된 상태다.
+#
+# 다시 켜려면 아래 schedule 블록의 주석을 풀면 된다. ANTHROPIC_API_KEY가
+# 등록돼 있어야 하고, 리포 기본 브랜치가 main이어야 한다.
+#
+# 수동 실행(workflow_dispatch)은 그대로 살아 있다.
 on:
-  schedule:
-    # UTC 월요일 01:00 = KST 월요일 10:00.
-    - cron: '0 1 * * 1'
+  # schedule:
+  #   # UTC 월요일 01:00 = KST 월요일 10:00.
+  #   - cron: '0 1 * * 1'
   workflow_dispatch:
     inputs:
       count:
